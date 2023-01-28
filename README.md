@@ -23,7 +23,7 @@ Pulsa Ctrl+D para guardar el texto en el archivo y salir del comando cat.
 La línea `#!/bin/bash` se conoce como la línea shebang y en alguna literatura, se conoce como la línea hashbang y eso es porque comienza con los dos caracteres hash ‘#’ y bang ‘!’.
 
 ```
-#! /bin/bash
+#!/usr/bin/bash
 
 echo "¡Hola, mundo!"
 ```
