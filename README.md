@@ -110,7 +110,7 @@ Aquí, utilicé el comando read para transferir el control de la ejecución del 
 
 Puedes usar el signo igual para crear y establecer el valor de una variable. Por ejemplo, la siguiente línea creará una variable llamada `edad` y establecerá su valor en 27.
 
-``
+```
 edad = 21
 ```
 
