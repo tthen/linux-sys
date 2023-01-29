@@ -41,5 +41,45 @@ Cuando incluyes la línea `#!/bin/bash` en la parte superior de tu script, el si
 ./hello.sh
 ```
 
+Habrás notado que he utilizado `./hello.sh` para ejecutar el script; obtendrás un error si omites el `./` inicial
+
+```
+team@itsfoss:~/scripts$ hello.sh
+hello.sh: command not found
+```
+
+Bash pensó que estabas tratando de ejecutar un comando llamado `hello.sh`. Cuando ejecutas cualquier comando en tu terminal; el shell busca ese comando en un conjunto de directorios que se almacenan en la variable `PATH`.
+
+Puedes usar echo para ver el contenido de esa variable `PATH`:
+
+```
+echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+```
+
+El carácter de dos puntos (`:`) separa la ruta de cada uno de los directorios que su shell explora cada vez que ejecuta un comando.
+
+Los comandos de Linux como `echo`, `cat`, etc. pueden ejecutarse desde cualquier lugar porque sus archivos ejecutables se almacenan en los directorios `bin`. Los directorios `bin` se incluyen en el `PATH`. Cuando se ejecuta un comando, el sistema comprueba el `PATH` para todos los posibles lugares que debe buscar para encontrar el ejecutable para ese comando.
+
+Si quieres ejecutar tu script bash desde cualquier lugar, como si fuera un comando normal de Linux, añade la ubicación de tu script de shell a la variable` PATH`.
+
+Primero, obten la ubicación del directorio de tu script (asumiendo que está en el mismo directorio), usa el comando `PWD`:
+
+```
+pwd
+```
+
+Utiliza el comando export para añadir tu directorio de scripts a la variable `PATH`.
+
+```
+export PATH=$PATH:/home/user/scripts
+```
+
+El momento de la verdad está aquí; ejecuta `hello.sh`:
+
+```
+team@itsfoss:~/scripts$ hello.sh
+Hello, World!
+```
 
 
