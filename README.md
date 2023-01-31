@@ -180,6 +180,16 @@ Como puedes ver, ¡sólo has necesitado dos líneas! Ahora ejecute el script:
 ./hola.sh
 ```
 
+## Add user
+<!-- https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-a-centos-7-server 
+-->
+
+When you first start using a fresh Linux server, adding and removing users is often one of the first things you’ll need to do. In this guide, you will learn how to create user accounts, assign sudo privileges, and delete users on a CentOS 7 server.
+
+To complete this tutorial, you will need:
+
+A CentOS 7 server with a non-root sudo-enabled user. If you are logged in as root instead, you can drop the sudo portion of all the following commands. For guidance, please see our tutorial [Initial Server Setup with CentOS 7](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-centos-7).
+
 
 
 
