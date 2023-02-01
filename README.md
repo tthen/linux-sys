@@ -262,7 +262,43 @@ sudo userdel -r sammy
 With either command, the user will automatically be removed from any groups that they were added to, including the wheel group if they were given sudo privileges. If you later add another user with the same name, they will have to be added to the wheel group again to gain sudo access.
 
 
+<!--
+-->
+## Which do you use: ip or ifconfig?
 
+Like a lot of users, I learned `ifconfig`, although I don't recall whether it's because the `ip` command didn't exist at the time or whether it just hadn't gained traction. It took a while to get used to `ip`, but when I understood how much `ip` encompassed, I switched over to it as soon as I could find a good cheat sheet for it. I think of `ip` as a suite.`
+
+If you're using `ifconfig` as just a query for an IP address, then `ip addr show` may seem superfluous. But when you're setting network routes and adding interfaces and IP addresses, the `ip` command suite brings your tasks together into a unified interface. For instance, instead of using `ifconfig` and `route`, each with different syntax, you can just use `ip`.
+
+For instance, here's `ifconfig`:
+
+```
+$ sudo ifconfig eth0 add 192.168.12.20
+$ sudo route add default gw 192.168.12.0 eth0
+```
+
+Those are valid commands, but they're not very consistent from the user's perspective. The device definition is front-loaded with `ifconfig` and trailing with `route`.
+
+Here's the same process using `ip`:
+
+```
+$ sudo ip addr add 192.168.12.20 dev eth0
+$ sudo ip route add 192.168.12.0/24 dev eth0 proto static
+```
+
+From a user interface perspective, the `ip` commands have a kind of symmetry. They're practically identical, so once you train yourself to understand the syntax of one `ip` subcommand, you know it for all `ip` subcommands.
+
+And there's a lot you can do with `ip`. Each subcommand has its own manual entry, so you can focus on parsing each command's options without sorting through options that don't apply.
+
+```
+$ man ip-route
+$ man ip-address
+$ man ip-link
+```
+There's nothing wrong with `ifconfig`, and if it's the command you know and it's the command that's working for you, then keep on using it. But if you're just now learning networking basics on Linux, focus on material that uses the `ip` command, and I believe you'll have an easier time comprehending the different components. Just as importantly, you'll find it easier to remember how to view and modify your network settings with one simple two-letter command: ip.
+
+<!--
+-->
 
 
 
