@@ -272,6 +272,49 @@ Changing password for user janes
 New Password:
 ```
 
+Al usuario se debe notificar el cambio del password por el que el desee. Una forma de obligarlo es otorgando un plazo corto para hacerlo en la fecha de expiracion. Pero para esto contamos con el comando `chage` (change user password spiry information), para forzar el cambio del password. Para ver como esta configurada la cuenta utilizar el siguiente comando.
+
+```
+sudo chage -l janes
+```
+
+Esto muestra las opciones default de la cuenta. Cada distribucion linux tiene su propio manejo. 
+
+En CentOS se pueden ver los defaults con el comando.
+
+```
+sudo useradd -D
+
+Output:
+
+GROUP=100
+HOME=/home
+INACTIVE=-l
+EXPIRE=
+SHELL=/bin/bash
+SKEL=/etc/skel
+CREATE_MAIL_SPOOL=yes
+```
+Es decir, los archivos que se van a encontrar en el directorio del usuario, son los mismos que aparecen en el directorio `/etc/skel`.
+
+Si quiero cambiar el comportamiento default del editor `vim` por ejemplo, que muestre la nuemracion de las lineas de codigo, lo puedo hacer en este diectorio con el siguiente comando.
+
+```
+sudo vim ./.vimrc
+```
+
+Al interior agregar `set numbers`, grabar y salir.
+
+Asi de esta manera se ha agregado el archivo `.vimrc` a los nuevos archivos default. Asi cuando se crea un nuevo usuario, este archivo aparecera en los default y podra utilizar esta configutacion del editor vim.
+
+Pero tambien hay otros sitios de donde provienen los defaults, es `login definitions`. Define los sitios donde se almacenan los emails. Aparece el password ages, crea el direcotorio de usuario, entre otras cosas,
+
+```
+sudo less /etc/login.defs
+``
+
+17:56
+
 <!--
 -->
 ## Which do you use: ip or ifconfig?
