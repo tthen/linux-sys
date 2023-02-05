@@ -311,7 +311,7 @@ Pero tambien hay otros sitios de donde provienen los defaults, es `login definit
 
 ```
 sudo less /etc/login.defs
-``
+```
 
 17:56
 
