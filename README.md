@@ -262,6 +262,16 @@ sudo userdel -r sammy
 With either command, the user will automatically be removed from any groups that they were added to, including the wheel group if they were given sudo privileges. If you later add another user with the same name, they will have to be added to the wheel group again to gain sudo access.
 
 
+Agregar los otros comandos: `useradd`, `userdel`, `usermod`. Revisar el uso de los comandos con `man usermod`.
+Cuando se crear el usuario este se crea sin password, asi que no se puede utilizar la cuenta por que el password esta en blanco. `useradd` no tiene la opcion de agregar el password. Por lo tanto se debe utilizar el comando `passwd`
+
+```
+sudo passwd janes
+Output:
+Changing password for user janes
+New Password:
+```
+
 <!--
 -->
 ## Which do you use: ip or ifconfig?
