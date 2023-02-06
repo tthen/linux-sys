@@ -180,6 +180,120 @@ Como puedes ver, ¡sólo has necesitado dos líneas! Ahora ejecute el script:
 ./hola.sh
 ```
 
+## Pasando Argumentos a los Scripts de Bash
+
+El siguiente script `contando_lineas.sh` mostrará el número total de líneas que existen en cualquier archivo que el usuario introduzca:
+
+```
+#!/user/bin/bash
+
+echo -n "Por favor, introduce la direccion del archivo: "
+read direccion_de_archivo
+numero_lineas=$(wc -l < $direccion_de_archivo)
+
+echo "Hay $numero_lineas lineas en $direccion_de_archivo"
+```
+
+Por ejemplo, el usuario puede introducir el archivo `/etc/passwd` y el script escupirá el número de líneas como resultado:
+
+Este script funciona bien; sin embargo, ¡hay una alternativa mucho mejor!
+
+En lugar de pedir al usuario el nombre del archivo, podemos hacer que el usuario simplemente pase el nombre del archivo como un argumento de la línea de comandos mientras se ejecuta el script de la siguiente manera:
+
+```
+./contando_lineas.sh /etc/passwd
+```
+
+El primer argumento bash (también conocido como parámetro posicional) puede ser accedido dentro de su script bash usando la variable `$1`.
+
+Así que en el script `contando_lineas.sh`, puedes sustituir la variable filename por `$1` de la siguiente manera:
+
+```
+#!/user/bin/bash
+
+numero_lineas=$(wc -l < $1)
+echo "Hay $numero_lineas lineas en $1"
+```
+
+Fíjate que también me he deshecho del comando `read` y del primer comando `echo` porque ya no son necesarios.
+
+Por último, puedes ejecutar el script y pasar cualquier archivo como argumento:
+
+```
+./contando_lineas.sh /etc/group
+Hay 62 lineas en /etc/group
+```
+
+Puedes pasar más de un argumento a tu script bash. En general, esta es la sintaxis para pasar múltiples argumentos a cualquier script bash:
+
+```
+script.sh arg1 arg2 arg3  …
+```
+
+El segundo argumento será referenciado por la variable `$2`, el tercer argumento es referenciado por `$3`, .. etc.
+
+La variable `$0` contiene el nombre de tu script bash en caso de que te lo estés preguntando.
+
+Ahora podemos editar nuestro script bash `contando_lineas.sh` para que pueda contar las líneas de más de un archivo:
+
+```
+#!/user/bin/bash
+
+n1=$(wc -l < $1)
+n2=$(wc -l < $2)
+n3=$(wc -l < $3)
+
+echo "Hay $n1 lineas en $1"
+echo "Hay $n2 lineas en $2"
+echo "Hay $n3 lineas en $3"
+```
+
+Algunos de ellos son un poco complicados, ya que pueden tener una larga sintaxis o una larga serie de opciones que puede utilizar.
+
+Afortunadamente, puedes utilizar los argumentos de bash para convertir un comando difícil en una tarea bastante fácil.
+
+Para demostrarlo, echa un vistazo al siguiente script bash `encontrar.sh`:
+
+```
+#!/user/bin/bash
+
+find / -iname $1 2> /dev/null
+```
+
+Es un script muy sencillo que, sin embargo, puede resultar muy útil. Puede suministrar cualquier nombre de archivo como argumento al script y éste mostrará la ubicación de su archivo:
+
+Verás como ahora es mucho más fácil que teclear todo el comando find! Esta es una prueba de que puedes usar argumentos para convertir cualquier comando largo y complicado en Linux en un simple script de bash.
+
+Si te preguntas sobre el 2> /dev/null, significa que cualquier mensaje de error (como que no se puede acceder al archivo) no se mostrará en la pantalla. Te sugiero que leas sobre la redirección de stderr en Linux para obtener más conocimientos sobre este tema.
+
+Bash tiene un montón de variables especiales incorporadas que son bastante útiles y están a tu disposición.
+
+La siguiente tabla destaca las variables especiales incorporadas más comunes de bash:
+
+```
+Variable Especial 	Descripción
+
+$0 	           El nombre del script bash.
+$1, $2…$n 	    Los argumentos del script bash.
+$$        	    El id del proceso del shell actual.
+$#         	   El número total de argumentos pasados al script.
+$@            	El valor de todos los argumentos pasados al script.
+$?            	El estado de salida del último comando ejecutado.
+$!            	El ID del proceso del último comando ejecutado.
+```
+
+Para ver estas variables especiales en acción; eche un vistazo al siguiente script bash `variables.sh`:
+
+```
+#!/user/bin/bash
+
+echo "Nombre del script: $0"
+echo "Número total de argumentos: $#"
+echo "Valor de todos los argumentos: $@"
+```
+
+Ahora puedes pasar los argumentos que quieras y ejecutar el script:
+
 ## Add user
 <!-- https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-a-centos-7-server 
 -->
