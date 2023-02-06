@@ -335,6 +335,24 @@ En las distribuciones modernas de Linux no se almacena el password en el archivo
 
 La informacion de los grupos se encuentra en el archivo `/etc/group`
 
+**Manejando grupos**
+
+Utilizar el comando `groupadd`
+
+```
+groupadd Sales
+```
+
+Para observar los grupos creados consultar el archivo `/etc/group`
+
+Borrar un grupo existente `groupdel`
+
+Cambiar el nombre de un grupo con el comando `groupmod`
+
+
+
+
+
 <!--
 -->
 ## Which do you use: ip or ifconfig?
