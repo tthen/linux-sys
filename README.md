@@ -303,17 +303,37 @@ Si quiero cambiar el comportamiento default del editor `vim` por ejemplo, que mu
 sudo vim ./.vimrc
 ```
 
-Al interior agregar `set numbers`, grabar y salir.
+Al interior agregar `set number`, grabar y salir.
 
 Asi de esta manera se ha agregado el archivo `.vimrc` a los nuevos archivos default. Asi cuando se crea un nuevo usuario, este archivo aparecera en los default y podra utilizar esta configutacion del editor vim.
 
-Pero tambien hay otros sitios de donde provienen los defaults, es `login definitions`. Define los sitios donde se almacenan los emails. Aparece el password ages, crea el direcotorio de usuario, entre otras cosas,
+Pero tambien hay otros sitios de donde provienen los defaults, es `login definitions`. Define los sitios donde se almacenan los emails. Aparece el password ages, crea el directorio de usuario, entre otras cosas,
 
 ```
 sudo less /etc/login.defs
 ```
 
-17:56
+Hay otros sitios, como el directorio `/etc/default`. Revisar el contenido del archivo useradd
+
+```
+# useradd default file
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/bash
+SKEL=/etc/skel
+CREATE_MAIL_SPOOL=yes
+```
+
+Archivo donde se almacenan todos los usuarios registrados en el sistema: `/etc/passwd`. 
+Al final del archivo se encuentran los usuarios con todos los valores, nombre de usuario, bash, directorio, shell, password como una `x`, pero no se puede ver realmente el password.
+
+Con `usermod` se puede modificar el shell que el usuario emplea por default, con el comando `chsh`. Asi cambia el comando shell
+
+En las distribuciones modernas de Linux no se almacena el password en el archivo `/etc/passwd`. Lo hace en un archivo oculto, es decir, en `/etc/shadow`. El contenido es similar al archivo `/etc/passwd`, pero encambio de la `x` tenemos los passwords en formato sha 256 hash.
+
+La informacion de los grupos se encuentra en el archivo `/etc/group`
 
 <!--
 -->
