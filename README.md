@@ -349,6 +349,85 @@ Borrar un grupo existente `groupdel`
 
 Cambiar el nombre de un grupo con el comando `groupmod`
 
+```
+sudo groupmod -n Marketing marketing
+
+tail /etc/group
+```
+El ultimo comando me permite ver los cambios o modificaciones realizadas.
+
+En linux existen dos tipos de grupos, el primario y el secundario. Cada vez que se crea un usuario se crea de igual manera el grupo con el nombre del usuario. 
+
+Con el siguiente comando se pueden observar el id del nombre. id del grupo primario y id del grupo secundario
+
+```
+sudo id htorres
+```
+
+Asi como hay password para usuario, tambien hay password para grupos, este es `gpasswd`. Aunque usualmente no se asignan podria hacerlo, pero tambien nos permite agregar otros usuarios al grupo que deseemos. Veamos como agregamos `jdoe` al grupo `Sales`.
+
+```
+sudo gpasswd -a jdoe Sales
+sudo gpasswd -a jsmith Marketing
+```
+
+Para eliminar un usuario de un grupo se utiliza e mismo comando, pero con la opcion `-d`, de la siguiente manera.
+
+```
+sudo gpasswd -d jsmith Marketing
+```
+Si se desea volver un usuario administrador del grupo, se puede hacer a un usuario que ya pertenezca al grupo utilizando el mismo comando, pero con la `A` mayuscula, de la siguiente manera,
+
+```
+sudo gpasswd -A jdoe Sales
+```
+
+Ahora `jdoe` esta autorizado para agregar y eliminar usuarios en su grupo.
+
+El comando `newgrp` permite el cambio momentaneo de usuario a un grupo secundario. A continuacion cambiando al grupo `Marketing`
+
+```
+newgrp Marketing
+```
+De esta manera podemos crear archivos para diferentes grupos, con este simple comando. Al realizar el listado con `ls -la` podemos ver que el usuario es el mismo, pero los grupos son diferentes.
+
+Podemos cambiar el nombre del grupo al archivo con el siguiente comando
+
+```
+chown htorres:Marketing file1.txt
+```
+
+Despues de hacer los cambios se regresa al grupo primario, que es el nombre de usuario, con el siguiente comando,
+
+```
+newgrp htorres
+```
+
+Para conocer el nombre de los grupos existentes en el sistema utilizar `groups`, o para conocer los grupos a los que pertenece un usuarios, asumiendo que tenga permiso para verlos `groups htorres`
+
+Para identificar los usuarios inscritos en los grupos existentes utilizamos el comando
+
+```
+tail /etc/group
+```
+
+El comando `getent` se utiliza para ver el contenido de los archivos `/etc/passwd`, `/etc/group` y ubicar rapidamente un usuario y su configuracion. Una forma de utilizar el comando es la siguiente.
+
+```
+getent passwd htorres
+getent group Marketing
+sudo getent shadow htorres
+```
+
+El anterior comando permite visualizar informacion rapidamente, aunque tambien se puede utilizar `grep` sobre cada uno de los archivos `etc`, veamos,
+
+```
+cat /etc/passwd | grep htorres
+
+# equivalente a 
+getent passwd htorres
+
+```
 
 
 
